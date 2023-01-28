@@ -173,7 +173,7 @@
 .profile-picture {
 	margin-left: 10px;
 	background-color: white;
-	border-radius:  50px;
+	border-radius: ï¿½50px;
 }
 
 

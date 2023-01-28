@@ -1,43 +1,43 @@
 package com.crms.demo.model;
 
 public class Feedback {
-    String feedback;
-    String fullname;
-    String date;
 
-    //default constructor
-    public Feedback() {
-    }
+  String feedback;
+  String fullname;
+  String date;
 
-    //constructor
-    public Feedback(String feedback, String fullname, String date) {
-        this.feedback = feedback;
-        this.fullname = fullname;
-        this.date = date;
-    }
+  //default constructor
+  public Feedback() {}
 
-    //accessors and mutators methods
-    public String getFeedback() {
-        return feedback;
-    }
+  //constructor
+  public Feedback(String feedback, String fullname, String date) {
+    this.feedback = feedback;
+    this.fullname = fullname;
+    this.date = date;
+  }
 
-    public void setFeedback(String feedback) {
-        this.feedback = feedback;
-    }
+  //accessors and mutators methods
+  public String getFeedback() {
+    return feedback;
+  }
 
-    public String getFullname() {
-        return fullname;
-    }
+  public void setFeedback(String feedback) {
+    this.feedback = feedback;
+  }
 
-    public void setFullname(String fullname) {
-        this.fullname = fullname;
-    }
+  public String getFullname() {
+    return fullname;
+  }
 
-    public String getDate() {
-        return date;
-    }
+  public void setFullname(String fullname) {
+    this.fullname = fullname;
+  }
 
-    public void setDate(String date) {
-        this.date = date;
-    }
+  public String getDate() {
+    return date;
+  }
+
+  public void setDate(String date) {
+    this.date = date;
+  }
 }
