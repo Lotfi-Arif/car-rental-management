@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class BookingController {
 
   @RequestMapping(
-    value = { "/viewAllBookings", "/viewEditBooking", "/viewAddBooking" }
+    value = { "/viewAllBookings", "/viewUpdateBooking", "/viewAddBooking" }
   )
   public String viewManageBooking(
     HttpSession session,
@@ -26,14 +26,15 @@ public class BookingController {
     System.out.println(bList);
     String url = request.getServletPath();
     if (
-      session.getAttribute("role").equals("admin") &&
+      session.getAttribute("role").equals("admin") ||
+      session.getAttribute("role").equals("staff") &&
       session.getAttribute("status").equals("success")
     ) {
       switch (url) {
         case "/viewAllBookings":
           return "admin/manageBooking";
-        case "/viewEditBooking":
-          return "admin/editBooking";
+        case "/viewUpdateBooking":
+          return "admin/UpdateBooking";
         default:
           return "admin/addBooking";
       }
@@ -66,14 +67,19 @@ public class BookingController {
       session.getAttribute("role").equals("admin") &&
       session.getAttribute("status").equals("success")
     ) {
-      return "admin/manageBooking";
+      return "redirect:/viewAddBooking";
+    } else if (
+      session.getAttribute("role").equals("staff") &&
+      session.getAttribute("status").equals("success")
+    ) {
+      return "redirect:/viewAddBooking";
     } else {
       return "invaliduser";
     }
   }
 
-  @RequestMapping(value = "/editBooking")
-  public String editBooking(
+  @RequestMapping(value = "/updateBooking")
+  public String updateBooking(
     HttpSession session,
     HttpServletRequest request,
     Model mod
@@ -96,7 +102,12 @@ public class BookingController {
       session.getAttribute("role").equals("admin") &&
       session.getAttribute("status").equals("success")
     ) {
-      return "admin/manageBooking";
+      return "admin/updateBooking";
+    } else if (
+      session.getAttribute("role").equals("staff") &&
+      session.getAttribute("status").equals("success")
+    ) {
+      return "staff/updateBooking";
     } else {
       return "invaliduser";
     }
@@ -116,7 +127,38 @@ public class BookingController {
       session.getAttribute("role").equals("admin") &&
       session.getAttribute("status").equals("success")
     ) {
-      return "admin/manageBooking";
+      return "redirect:/viewUpdateBooking";
+    } else if (
+      session.getAttribute("role").equals("staff") &&
+      session.getAttribute("status").equals("success")
+    ) {
+      return "redirect:/viewUpdateBooking";
+    } else {
+      return "invaliduser";
+    }
+  }
+
+  @RequestMapping(value = "/applyVoucher")
+  public String applyVoucher(
+    HttpSession session,
+    HttpServletRequest request,
+    Model mod
+  ) {
+    Booking booking = new Booking();
+    booking.setBookingId(Integer.parseInt(request.getParameter("bookingId")));
+    booking.setBookingVoucher(request.getParameter("bookingVoucher"));
+    BookingDAO bookingDAO = new BookingDAO();
+    bookingDAO.applyVoucher(booking);
+    if (
+      session.getAttribute("role").equals("admin") &&
+      session.getAttribute("status").equals("success")
+    ) {
+      return "redirect:/viewUpdateBooking";
+    } else if (
+      session.getAttribute("role").equals("staff") &&
+      session.getAttribute("status").equals("success")
+    ) {
+      return "redirect:/viewUpdateBooking";
     } else {
       return "invaliduser";
     }

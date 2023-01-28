@@ -3,8 +3,9 @@ package com.crms.demo.model;
 public class Booking {
 
   int bookingId;
-  String customerName, vehicleBrand, vehicleModel, vehicleColour, vehicleRegistrationNo, bookingDate, bookingTime;
+  String customerName, vehicleBrand, vehicleModel, vehicleColour, vehicleRegistrationNo, bookingDate, bookingTime, bookingVoucher;
   int vehicleId, customerId;
+  float bookingPrice;
 
   public Booking() {}
 
@@ -18,7 +19,9 @@ public class Booking {
     String bookingDate,
     String bookingTime,
     int vehicleId,
-    int customerId
+    int customerId,
+    String bookingVoucher,
+    float bookingPrice
   ) {
     this.bookingId = bookingId;
     this.customerName = customerName;
@@ -30,6 +33,8 @@ public class Booking {
     this.bookingTime = bookingTime;
     this.vehicleId = vehicleId;
     this.customerId = customerId;
+    this.bookingVoucher = bookingVoucher;
+    this.bookingPrice = bookingPrice;
   }
 
   public int getBookingId() {
@@ -110,5 +115,27 @@ public class Booking {
 
   public void setCustomerId(int customerId) {
     this.customerId = customerId;
+  }
+
+  public String getBookingVoucher() {
+    return bookingVoucher;
+  }
+
+  public void setBookingVoucher(String bookingVoucher) {
+    this.bookingVoucher = bookingVoucher;
+  }
+
+  public float getBookingPrice() {
+    return bookingPrice;
+  }
+
+  public void setBookingPrice(float bookingPrice) {
+    this.bookingPrice = bookingPrice;
+  }
+
+  public float updateBookingPriceWithDiscount(float discount) {
+    return (
+      this.bookingPrice = this.bookingPrice - (this.bookingPrice * discount)
+    );
   }
 }

@@ -111,4 +111,14 @@ public class BookingDAO {
     String sql = "DELETE FROM Booking WHERE bookingId = ?";
     jdbct.update(sql, booking.getBookingId());
   }
+
+  public void applyVoucher(Booking booking) {
+    JdbcTemplate jdbct = new JdbcTemplate(getDataSource());
+    String sql = "UPDATE Booking SET bookingPrice = ? WHERE bookingId = ?";
+    jdbct.update(
+      sql,
+      booking.updateBookingPriceWithDiscount(20),
+      booking.getBookingId()
+    );
+  }
 }
